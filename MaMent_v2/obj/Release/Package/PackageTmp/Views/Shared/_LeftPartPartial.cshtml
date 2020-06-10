@@ -1,0 +1,37 @@
+﻿@if (Session["userId"] != null)
+{
+    <form action="@Url.Action("Search", "CONTENTTABLEs")" method="get">
+        <div class="input-group mr-5">
+            @Html.TextBox("q", null, new { @class = "form-control", @placeholder = "Search here" })
+            <div class="input-group-append">
+                <input type="submit" value="Search" class="btn btn-outline-secondary text-white-50" />
+            </div>
+        </div>
+    </form>
+        <li class="nav-item dropdown ml-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manage
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                @if (Session["userRole"].ToString() == "admin")
+                {
+                    <a href="/usertables/index" class="dropdown-item">
+                        User
+                    </a>
+                    <a href="/roletables/index" class="dropdown-item">
+                        Role
+                    </a>
+                    <a href="/contenttypetables/index" class="dropdown-item">
+                        Content Type
+                    </a>
+                }
+                <a href="/contenttables/index" class="dropdown-item">
+                    Content
+                </a>
+            </div>
+        </li>
+}
+else
+{
+    //nothing
+}

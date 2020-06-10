@@ -1,0 +1,73 @@
+﻿@* menggunakan view model *@
+@model MaMent_v2.ViewModels.CONTENTTABLEVIEW
+
+@{
+    ViewBag.Title = "Details Content";
+}
+
+<div class="row">
+    @*judul content*@
+    <div class="col-6"><h2>@Html.DisplayFor(model => model.contentTitle)</h2></div>
+    <div class="col-6 text-right">
+        <p>
+            <a href="@Url.Action("Index", "CONTENTTABLEs")" class="btn btn-primary">Back</a>
+        </p>
+    </div>
+</div>
+
+<div>
+    <div class="text-muted">
+        @*typography untuk menampilkan pembuat content,  content type dan tanggal date dibuat*@
+        <footer class="blockquote-footer">By @Html.DisplayFor(model => model.userName) in <cite title="@Html.DisplayFor(model => model.contentTypeName)">@Html.DisplayFor(model => model.contentTypeName)</cite> at @Html.DisplayFor(model => model.newDate)</footer>
+    </div>
+    <hr />
+    <div class="text-justify">
+        @Html.DisplayFor(model => model.contentDescription)
+    </div>
+
+    @*cek link*@
+    @if (Model.contentLink != null)
+    {
+        <div class=text-justify>
+            <br />
+            <div><a href="@Html.DisplayFor(model => model.contentLink)" target="_blank">@Html.DisplayFor(model => model.contentLink)</a></div>
+        </div>
+    }
+    @* cek attachment *@
+    @if (Model.contentFilePath != null)
+    {
+        <div class=text-justify>
+            <br />
+            <div>@Html.ActionLink("Here", "Attachment", new { id = Model.contentId }, new { @target = "_blank" }) is the document.</div>
+        </div>
+    }
+
+    @* menampilkan role content *@
+    <div class="text-justify">
+        <br />
+        Available for only role(s) below :<br />
+        @{ int x = 0; }
+        @foreach (var item in Model.contentRole)
+        {
+            if (item.Checked)
+            {
+                if (x != 0)
+                {
+                    <text>| </text>
+                }
+                @item.Name
+                x++;
+            }
+        }
+    </div>
+
+    @* cek keyword *@
+    @if (Model.contentKeyword != null)
+    {
+        <div class="text-justify">
+            <br />
+            Keyword(s) :<br />
+            @Html.DisplayFor(z => z.contentKeyword)
+        </div>
+    }
+</div>

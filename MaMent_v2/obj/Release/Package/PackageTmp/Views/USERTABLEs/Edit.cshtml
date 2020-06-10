@@ -1,0 +1,97 @@
+﻿@* menggunakan view model *@
+@model MaMent_v2.ViewModels.USERTABLEVIEW2
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-6"><h4>Edit User</h4></div>
+            <div class="col-6 text-right">
+                <p>
+                    <a href="@Url.Action("Index", "USERTABLEs")" class="btn btn-primary">Back</a>
+                </p>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.userId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                <div class="text-danger">@ViewBag.USERNAMENOT</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.userPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.userPassword, new { htmlAttributes = new { @class = "form-control", @type = "password", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.userPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* membuat checkbox berdasarkan role, role yang dimiliki user akan secara default tercentang *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.userRole, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                <div class="row">
+                    @for (int i = 0; i < Model.userRole.Count(); i++)
+                    {
+                        <div class="col-2">
+                            @* untuk super admin, role tidak bisa diubah *@
+                            @if (Model.userId != 1)
+                            {
+                                //bukan super admin, role bisa diubah
+                                @Html.EditorFor(m => Model.userRole[i].Checked)
+                            }
+                            else
+                            {
+                                //super admin tidak bisa diubah rolenya
+                                @Html.EditorFor(m => Model.userRole[i].Checked, new { htmlAttributes = new { @onclick = "return false;" } })
+                            }
+                            @Html.DisplayFor(m => Model.userRole[i].Name)
+                            @Html.HiddenFor(m => Model.userRole[i].Name)
+                            @Html.HiddenFor(m => Model.userRole[i].Id)
+                        </div>
+                    }
+                </div>
+                <div class="text-danger">@ViewBag.USERROLE</div>
+            </div>
+        </div>
+
+        @* cek super admin *@
+        @if (Model.userId == 1)
+        {
+            //tidak menampilkan select untuk super admin karena akan selalu berstatus aktif
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.STATUSID, "User Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.DropDownList("STATUSID", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 100%" })
+                    @Html.ValidationMessageFor(model => model.STATUSID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,36 @@
+﻿@* menggunakan model *@
+@model MaMent_v2.Models.CONTENTTYPETABLE
+
+@{
+    ViewBag.Title = "Details Content Type";
+}
+
+<div>
+    <div class="row">
+        <div class="col-6"><h4>Details Content Type</h4></div>
+        <div class="col-6 text-right">
+            <p>
+                <a href="@Url.Action("Index", "CONTENTTYPETABLEs")" class="btn btn-primary">Back</a>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTENTTYPENAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTENTTYPENAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STATUSTABLE.STATUSNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUSTABLE.STATUSNAME)
+        </dd>
+
+    </dl>
+</div>

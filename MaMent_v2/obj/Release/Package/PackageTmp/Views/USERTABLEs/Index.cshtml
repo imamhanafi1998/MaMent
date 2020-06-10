@@ -1,0 +1,66 @@
+﻿@* menggunakan model *@
+@model IEnumerable<MaMent_v2.Models.USERTABLE>
+
+@{
+    ViewBag.Title = "User List";
+}
+
+<p>
+    <a href="@Url.Action("Create", "USERTABLEs")" class="btn btn-primary btn-sm">Create New User</a>
+</p>
+<table class="table table-responsive-sm table-hover">
+    <tr class="">
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.USERPASSWORD)
+        </th>
+        <th scope="col">
+            @*@Html.DisplayNameFor(model => model.STATUSTABLE.STATUSNAME)*@
+            User Status
+        </th>
+        <th scope="col"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.USERNAME)
+            </td>
+            <td>
+                Prefer not displayed.
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STATUSTABLE.STATUSNAME)
+            </td>
+            <td>
+                @* cek super admin *@
+                @if (item.USERID != 1)
+                {
+                    //jika row bukan super admin, button edit akan muncul
+                    @Html.ActionLink("Edit", "Edit", new { id = item.USERID }, new { @class = "btn btn-secondary btn-sm" })
+                }
+                else
+                {
+                    //row bukan super admin
+
+                    //jika yang login super admin, button edit akan muncul
+                    if (Convert.ToInt32(Session["userId"]) == 1)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.USERID }, new { @class = "btn btn-secondary btn-sm" })
+                    }
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.USERID }, new { @class = "btn btn-info btn-sm" })
+                @if (item.USERID != 1)
+                {
+                    //row user super admin, tidak akan pernah menampilkan button delete
+                    //sehingga hanya row yang bukan super admin saja yang akan ditampilkan button delete nya
+                    @Html.ActionLink("Delete", "Delete", new { id = item.USERID }, new { @class = "btn btn-danger btn-sm" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

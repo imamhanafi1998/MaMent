@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MaMent_DB_v2ModelStoreContainer" CdmEntityContainer="MaMent_DB_v2Entities">
+    <EntitySetMapping Name="CONTENTROLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.CONTENTROLE">
+        <MappingFragment StoreEntitySet="CONTENTROLE">
+          <ScalarProperty Name="CONTENTROLEID" ColumnName="CONTENTROLEID" />
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="CONTENTID" ColumnName="CONTENTID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTENTTABLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.CONTENTTABLE">
+        <MappingFragment StoreEntitySet="CONTENTTABLE">
+          <ScalarProperty Name="CONTENTID" ColumnName="CONTENTID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="STATUSID" ColumnName="STATUSID" />
+          <ScalarProperty Name="CONTENTTYPEID" ColumnName="CONTENTTYPEID" />
+          <ScalarProperty Name="CONTENTTITLE" ColumnName="CONTENTTITLE" />
+          <ScalarProperty Name="CONTENTDESCRIPTION" ColumnName="CONTENTDESCRIPTION" />
+          <ScalarProperty Name="CONTENTLINK" ColumnName="CONTENTLINK" />
+          <ScalarProperty Name="CONTENTFILEPATH" ColumnName="CONTENTFILEPATH" />
+          <ScalarProperty Name="CONTENTDATE" ColumnName="CONTENTDATE" />
+          <ScalarProperty Name="CONTENTKEYWORD" ColumnName="CONTENTKEYWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTENTTYPETABLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.CONTENTTYPETABLE">
+        <MappingFragment StoreEntitySet="CONTENTTYPETABLE">
+          <ScalarProperty Name="CONTENTTYPEID" ColumnName="CONTENTTYPEID" />
+          <ScalarProperty Name="STATUSID" ColumnName="STATUSID" />
+          <ScalarProperty Name="CONTENTTYPENAME" ColumnName="CONTENTTYPENAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROLETABLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.ROLETABLE">
+        <MappingFragment StoreEntitySet="ROLETABLE">
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="STATUSID" ColumnName="STATUSID" />
+          <ScalarProperty Name="ROLENAME" ColumnName="ROLENAME" />
+          <ScalarProperty Name="ROLEDESCRIPTION" ColumnName="ROLEDESCRIPTION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STATUSTABLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.STATUSTABLE">
+        <MappingFragment StoreEntitySet="STATUSTABLE">
+          <ScalarProperty Name="STATUSID" ColumnName="STATUSID" />
+          <ScalarProperty Name="STATUSNAME" ColumnName="STATUSNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERROLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.USERROLE">
+        <MappingFragment StoreEntitySet="USERROLE">
+          <ScalarProperty Name="USERROLEID" ColumnName="USERROLEID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERTABLEs">
+      <EntityTypeMapping TypeName="MaMent_DB_v2Model.USERTABLE">
+        <MappingFragment StoreEntitySet="USERTABLE">
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="STATUSID" ColumnName="STATUSID" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

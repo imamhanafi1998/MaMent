@@ -1,0 +1,46 @@
+﻿@* menggunakan model *@
+@model MaMent_v2.Models.CONTENTTYPETABLE
+
+@{
+    ViewBag.Title = "Delete Content Type";
+}
+
+<div>
+    <div class="row">
+        <div class="col-6"><h3>Are you sure you want to delete this?</h3></div>
+        <div class="col-6 text-right">
+            <p>
+                <a href="@Url.Action("Index", "CONTENTTYPETABLEs")" class="btn btn-primary">Back</a>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTENTTYPENAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTENTTYPENAME)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.STATUSTABLE.STATUSNAME)*@
+            Content Type Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUSTABLE.STATUSNAME)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>

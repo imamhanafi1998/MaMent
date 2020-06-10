@@ -1,0 +1,71 @@
+﻿@* menggunakan view model *@
+@* menggunakan view model *@
+@model MaMent_v2.ViewModels.USERTABLEVIEW2
+
+@{
+    ViewBag.Title = "Create User";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-6"><h4>Create New User</h4></div>
+            <div class="col-6 text-right">
+                <p>
+                    <a href="@Url.Action("Index", "USERTABLEs")" class="btn btn-primary">Back</a>
+                </p>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="control-label col-md-2" id="userId">Username</div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.userName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                <div class="text-danger">@ViewBag.USERNAMENOT</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2" id="userPassword">Password</div>
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.userPassword, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(model => model.userPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* membuat checkbox dari role *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.userRole, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                <div class="row">
+                    @for (int i = 0; i < Model.userRole.Count(); i++)
+                    {
+                        <div class="col-2">
+                            @Html.EditorFor(m => Model.userRole[i].Checked)
+                            @Html.DisplayFor(m => Model.userRole[i].Name)
+
+                            @Html.HiddenFor(m => Model.userRole[i].Name)
+                            @Html.HiddenFor(m => Model.userRole[i].Id)
+                        </div>
+                    }
+                </div>
+                <div class="text-danger">@ViewBag.USERROLE</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary btn-group-lg" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

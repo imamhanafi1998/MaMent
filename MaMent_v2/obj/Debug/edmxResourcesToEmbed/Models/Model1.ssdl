@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MaMent_DB_v2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CONTENTROLE">
+    <Key>
+      <PropertyRef Name="CONTENTROLEID" />
+    </Key>
+    <Property Name="CONTENTROLEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ROLEID" Type="int" />
+    <Property Name="CONTENTID" Type="int" />
+  </EntityType>
+  <EntityType Name="CONTENTTABLE">
+    <Key>
+      <PropertyRef Name="CONTENTID" />
+    </Key>
+    <Property Name="CONTENTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="int" Nullable="false" />
+    <Property Name="STATUSID" Type="int" Nullable="false" />
+    <Property Name="CONTENTTYPEID" Type="int" Nullable="false" />
+    <Property Name="CONTENTTITLE" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CONTENTDESCRIPTION" Type="text" Nullable="false" />
+    <Property Name="CONTENTLINK" Type="varchar" MaxLength="200" />
+    <Property Name="CONTENTFILEPATH" Type="varchar" MaxLength="1000" />
+    <Property Name="CONTENTDATE" Type="datetime" Nullable="false" />
+    <Property Name="CONTENTKEYWORD" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="CONTENTTYPETABLE">
+    <Key>
+      <PropertyRef Name="CONTENTTYPEID" />
+    </Key>
+    <Property Name="CONTENTTYPEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STATUSID" Type="int" Nullable="false" />
+    <Property Name="CONTENTTYPENAME" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ROLETABLE">
+    <Key>
+      <PropertyRef Name="ROLEID" />
+    </Key>
+    <Property Name="ROLEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STATUSID" Type="int" Nullable="false" />
+    <Property Name="ROLENAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ROLEDESCRIPTION" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STATUSTABLE">
+    <Key>
+      <PropertyRef Name="STATUSID" />
+    </Key>
+    <Property Name="STATUSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STATUSNAME" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USERROLE">
+    <Key>
+      <PropertyRef Name="USERROLEID" />
+    </Key>
+    <Property Name="USERROLEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="int" />
+    <Property Name="ROLEID" Type="int" />
+  </EntityType>
+  <EntityType Name="USERTABLE">
+    <Key>
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STATUSID" Type="int" Nullable="false" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USERPASSWORD" Type="varchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CONTENTR_CONTENTRO_CONTENTT">
+    <End Role="CONTENTTABLE" Type="Self.CONTENTTABLE" Multiplicity="0..1" />
+    <End Role="CONTENTROLE" Type="Self.CONTENTROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONTENTTABLE">
+        <PropertyRef Name="CONTENTID" />
+      </Principal>
+      <Dependent Role="CONTENTROLE">
+        <PropertyRef Name="CONTENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONTENTR_CONTENTRO_ROLETABL">
+    <End Role="ROLETABLE" Type="Self.ROLETABLE" Multiplicity="0..1" />
+    <End Role="CONTENTROLE" Type="Self.CONTENTROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLETABLE">
+        <PropertyRef Name="ROLEID" />
+      </Principal>
+      <Dependent Role="CONTENTROLE">
+        <PropertyRef Name="ROLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONTENTT_CONTENTCO_CONTENTT">
+    <End Role="CONTENTTYPETABLE" Type="Self.CONTENTTYPETABLE" Multiplicity="1" />
+    <End Role="CONTENTTABLE" Type="Self.CONTENTTABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONTENTTYPETABLE">
+        <PropertyRef Name="CONTENTTYPEID" />
+      </Principal>
+      <Dependent Role="CONTENTTABLE">
+        <PropertyRef Name="CONTENTTYPEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONTENTT_CONTENTST_STATUSTA">
+    <End Role="STATUSTABLE" Type="Self.STATUSTABLE" Multiplicity="1" />
+    <End Role="CONTENTTABLE" Type="Self.CONTENTTABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUSTABLE">
+        <PropertyRef Name="STATUSID" />
+      </Principal>
+      <Dependent Role="CONTENTTABLE">
+        <PropertyRef Name="STATUSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONTENTT_CONTENTTY_STATUSTA">
+    <End Role="STATUSTABLE" Type="Self.STATUSTABLE" Multiplicity="1" />
+    <End Role="CONTENTTYPETABLE" Type="Self.CONTENTTYPETABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUSTABLE">
+        <PropertyRef Name="STATUSID" />
+      </Principal>
+      <Dependent Role="CONTENTTYPETABLE">
+        <PropertyRef Name="STATUSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLETABL_ROLESTATU_STATUSTA">
+    <End Role="STATUSTABLE" Type="Self.STATUSTABLE" Multiplicity="1" />
+    <End Role="ROLETABLE" Type="Self.ROLETABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUSTABLE">
+        <PropertyRef Name="STATUSID" />
+      </Principal>
+      <Dependent Role="ROLETABLE">
+        <PropertyRef Name="STATUSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERTABL_USERSTATU_STATUSTA">
+    <End Role="STATUSTABLE" Type="Self.STATUSTABLE" Multiplicity="1" />
+    <End Role="USERTABLE" Type="Self.USERTABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUSTABLE">
+        <PropertyRef Name="STATUSID" />
+      </Principal>
+      <Dependent Role="USERTABLE">
+        <PropertyRef Name="STATUSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MaMent_DB_v2ModelStoreContainer">
+    <EntitySet Name="CONTENTROLE" EntityType="Self.CONTENTROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONTENTTABLE" EntityType="Self.CONTENTTABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONTENTTYPETABLE" EntityType="Self.CONTENTTYPETABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLETABLE" EntityType="Self.ROLETABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STATUSTABLE" EntityType="Self.STATUSTABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERROLE" EntityType="Self.USERROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERTABLE" EntityType="Self.USERTABLE" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CONTENTR_CONTENTRO_CONTENTT" Association="Self.FK_CONTENTR_CONTENTRO_CONTENTT">
+      <End Role="CONTENTTABLE" EntitySet="CONTENTTABLE" />
+      <End Role="CONTENTROLE" EntitySet="CONTENTROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONTENTR_CONTENTRO_ROLETABL" Association="Self.FK_CONTENTR_CONTENTRO_ROLETABL">
+      <End Role="ROLETABLE" EntitySet="ROLETABLE" />
+      <End Role="CONTENTROLE" EntitySet="CONTENTROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONTENTT_CONTENTCO_CONTENTT" Association="Self.FK_CONTENTT_CONTENTCO_CONTENTT">
+      <End Role="CONTENTTYPETABLE" EntitySet="CONTENTTYPETABLE" />
+      <End Role="CONTENTTABLE" EntitySet="CONTENTTABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONTENTT_CONTENTST_STATUSTA" Association="Self.FK_CONTENTT_CONTENTST_STATUSTA">
+      <End Role="STATUSTABLE" EntitySet="STATUSTABLE" />
+      <End Role="CONTENTTABLE" EntitySet="CONTENTTABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONTENTT_CONTENTTY_STATUSTA" Association="Self.FK_CONTENTT_CONTENTTY_STATUSTA">
+      <End Role="STATUSTABLE" EntitySet="STATUSTABLE" />
+      <End Role="CONTENTTYPETABLE" EntitySet="CONTENTTYPETABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROLETABL_ROLESTATU_STATUSTA" Association="Self.FK_ROLETABL_ROLESTATU_STATUSTA">
+      <End Role="STATUSTABLE" EntitySet="STATUSTABLE" />
+      <End Role="ROLETABLE" EntitySet="ROLETABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERTABL_USERSTATU_STATUSTA" Association="Self.FK_USERTABL_USERSTATU_STATUSTA">
+      <End Role="STATUSTABLE" EntitySet="STATUSTABLE" />
+      <End Role="USERTABLE" EntitySet="USERTABLE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

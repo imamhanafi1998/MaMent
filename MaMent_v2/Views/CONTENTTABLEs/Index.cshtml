@@ -1,0 +1,42 @@
+﻿@*menggunakan view model*@
+@model IEnumerable<MaMent_v2.Models.CONTENTTABLE>
+
+@{
+    ViewBag.Title = "Content List";
+}
+<p>
+    <a href="@Url.Action("Create", "CONTENTTABLEs")" class="btn btn-primary btn-sm">Create New Content</a>
+</p>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">
+                        @Html.DisplayFor(modelItem => item.CONTENTTITLE)
+                    </h3>
+                    <br />
+                    <p class="mb-auto text-truncate">
+                        @Html.DisplayFor(modelItem => item.CONTENTDESCRIPTION)
+                    </p>
+                    <div class="row mt-2">
+                        <div class="col-3 text-left">
+                            @Html.ActionLink("Read More...", "Details", new { id = item.CONTENTID }, new { @class = "" })
+                        </div>
+
+                        @* cek button edit dan delete *@
+                        @if (item.USERID == Convert.ToInt32(Session["userId"]) || Session["userRole"].ToString() == "admin")
+                        {
+                            //ini miliknya || user yang login adalah admin
+                            <div class="col-9 text-right">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CONTENTID }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CONTENTID }, new { @class = "btn btn-danger btn-sm" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

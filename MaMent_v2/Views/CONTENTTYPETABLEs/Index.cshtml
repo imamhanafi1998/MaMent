@@ -1,0 +1,41 @@
+﻿@* menggunakan model *@
+@model IEnumerable<MaMent_v2.Models.CONTENTTYPETABLE>
+
+@{
+    ViewBag.Title = "Content Type List";
+}
+
+<p>
+    <a href="@Url.Action("Create", "CONTENTTYPETABLEs")" class="btn btn-primary btn-sm">Create New Content Type</a>
+</p>
+<table class="table table-responsive-sm table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTENTTYPENAME)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.STATUSTABLE.STATUSNAME)*@
+            Content Type Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CONTENTTYPENAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STATUSTABLE.STATUSNAME)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CONTENTTYPEID }, new { @class = "btn btn-secondary btn-sm" })
+                @Html.ActionLink("Details", "Details", new { id = item.CONTENTTYPEID }, new { @class = "btn btn-info btn-sm" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.CONTENTTYPEID }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+

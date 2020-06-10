@@ -1,0 +1,42 @@
+﻿@* menggunakan model *@
+@model MaMent_v2.Models.CONTENTTYPETABLE
+
+@{
+    ViewBag.Title = "Create Content Type";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-6"><h4>Create Content Type</h4></div>
+            <div class="col-6 text-right">
+                <p>
+                    <a href="@Url.Action("Index", "CONTENTTYPETABLEs")" class="btn btn-primary">Back</a>
+                </p>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CONTENTTYPENAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.CONTENTTYPENAME, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.CONTENTTYPENAME, "", new { @class = "text-danger" })
+                <div class="text-danger">@ViewBag.CONTENTTYPENAMENOT</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,110 @@
+﻿@* menggunakan view model *@
+@model MaMent_v2.ViewModels.CONTENTTABLEVIEW
+@{
+    ViewBag.Title = "Edit Content";
+}
+
+@using (Html.BeginForm("Edit", "CONTENTTABLEs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-6"><h4>Edit Content</h4></div>
+            <div class="col-6 text-right">
+                <p>
+                    <a href="@Url.Action("Index", "CONTENTTABLEs")" class="btn btn-primary">Back</a>
+                </p>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.contentId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CONTENTTYPEID, "Content Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.DropDownList("CONTENTTYPEID", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 100%" })
+                @Html.ValidationMessageFor(model => model.CONTENTTYPEID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contentTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.contentTitle, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.contentTitle, "", new { @class = "text-danger" })
+                <div class="text-danger">@ViewBag.CONTENTTITLENOT</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contentDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.contentDescription, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.contentDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contentLink, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12"> 
+                @Html.EditorFor(model => model.contentLink, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.contentLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contentFilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.contentFilePath, new { htmlAttributes = new { @class = "form-control", @type = "file", @style = "min-width: 100%", @accept = ".txt, .doc, .docx, .pdf, .xls, .xlsx" } })
+                @Html.ValidationMessageFor(model => model.contentFilePath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contentKeyword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.contentKeyword, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.contentKeyword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*form group role*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.contentRole, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                <div class="row">
+                    @for (int i = 0; i < Model.contentRole.Count(); i++)
+                    {
+                        <div class="col-2">
+                            @Html.EditorFor(m => Model.contentRole[i].Checked)
+                            @Html.DisplayFor(m => Model.contentRole[i].Name)
+                            @Html.HiddenFor(m => Model.contentRole[i].Name)
+                            @Html.HiddenFor(m => Model.contentRole[i].Id)
+                        </div>
+                    }
+                </div>
+                <div class="text-danger">@ViewBag.CONTENTROLE</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.STATUSID, "Content Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.DropDownList("STATUSID", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 100%" })
+                @Html.ValidationMessageFor(model => model.STATUSID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

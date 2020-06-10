@@ -1,0 +1,73 @@
+﻿@* menggunakan model *@
+@model MaMent_v2.Models.ROLETABLE
+
+@{
+    ViewBag.Title = "Edit Role";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-6"><h4>Edit Role</h4></div>
+            <div class="col-6 text-right">
+                <p>
+                    <a href="@Url.Action("Index", "ROLETABLEs")" class="btn btn-primary">Back</a>
+                </p>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ROLEID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ROLENAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.ROLENAME, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.ROLENAME, "", new { @class = "text-danger" })
+                <div class="text-danger">@ViewBag.ROLENAMENOT</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ROLEDESCRIPTION, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.ROLEDESCRIPTION, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 100%" } })
+                @Html.ValidationMessageFor(model => model.ROLEDESCRIPTION, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model.ROLEID == 1)
+        {
+            <div class="form-group d-none">
+                @Html.LabelFor(model => model.STATUSID, "Role Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.DropDownList("STATUSID", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 100%" })
+                    @Html.ValidationMessageFor(model => model.STATUSID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.STATUSID, "Role Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.DropDownList("STATUSID", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 100%" })
+                    @Html.ValidationMessageFor(model => model.STATUSID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,16 @@
+﻿@if (Session["userId"] != null)
+{
+    <li class="nav-item">
+        <a href="@Url.Action("Logout", "USERTABLEs")" class="nav-link">
+            Logout
+        </a>
+    </li>
+}
+else
+{
+    @*<li class="nav-item">
+        <a href="@Url.Action("Login", "USERTABLEs")" class="nav-link">
+            Login
+        </a>
+    </li>*@
+}

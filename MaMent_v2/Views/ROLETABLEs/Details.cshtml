@@ -1,0 +1,45 @@
+﻿@* menggunakan model *@
+@model MaMent_v2.Models.ROLETABLE
+
+@{
+    ViewBag.Title = "Details Role";
+}
+
+<div>
+    <div class="row">
+        <div class="col-6"><h4>Details Role</h4></div>
+        <div class="col-6 text-right">
+            <p>
+                <a href="@Url.Action("Index", "ROLETABLEs")" class="btn btn-primary">Back</a>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLENAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLENAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLEDESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLEDESCRIPTION)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.STATUSTABLE.STATUSNAME)*@
+            Role Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUSTABLE.STATUSNAME)
+        </dd>
+
+    </dl>
+</div>

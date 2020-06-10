@@ -1,0 +1,59 @@
+﻿@* menggunakan model *@
+@model IEnumerable<MaMent_v2.Models.ROLETABLE>
+
+@{
+    ViewBag.Title = "Role List";
+}
+
+<p>
+    <a href="/roletables/Create" class="btn btn-primary btn-sm">Create New Role</a>
+</p>
+<table class="table table-responsive-sm table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ROLENAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ROLEDESCRIPTION)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.STATUSTABLE.STATUSNAME)*@
+            Role Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ROLENAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ROLEDESCRIPTION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STATUSTABLE.STATUSNAME)
+            </td>
+            <td>
+                @if (item.ROLEID != 1)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ROLEID }, new { @class = "btn btn-secondary btn-sm" })
+                }
+                else
+                {
+                    if (Convert.ToInt32(Session["userId"]) == 1)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ROLEID }, new { @class = "btn btn-secondary btn-sm" })
+                    }
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.ROLEID }, new { @class = "btn btn-info btn-sm" })
+                @if (item.ROLEID != 1)
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ROLEID }, new { @class = "btn btn-danger btn-sm" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

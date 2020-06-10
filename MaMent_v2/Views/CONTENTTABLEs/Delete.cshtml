@@ -1,0 +1,45 @@
+﻿@*menggunakan model*@
+@model MaMent_v2.Models.CONTENTTABLE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div>
+    <div class="row">
+        <div class="col-6"><h3>Are you sure you want to delete this?</h3></div>
+        <div class="col-6 text-right">
+            <p>
+                <a href="@Url.Action("Index", "CONTENTTABLEs")" class="btn btn-primary">Back</a>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTENTTITLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTENTTITLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTENTDESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTENTDESCRIPTION)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>

@@ -1,0 +1,60 @@
+﻿@* menggunakan view model *@
+@model MaMent_v2.ViewModels.USERTABLEVIEW2
+
+@{
+    ViewBag.Title = "Details User";
+}
+<div>
+    <div class="row">
+        <div class="col-6"><h4>Details User</h4></div>
+        <div class="col-6 text-right">
+            <p>
+                <a href="@Url.Action("Index", "USERTABLEs")" class="btn btn-primary">Back</a>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userPassword)
+        </dt>
+
+        <dd>
+            Prefer not displayed.
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userRole)
+        </dt>
+
+        <dd>
+            @*membuat list untuk role yang dimiliki user*@
+            <ul>
+                @foreach (var item in Model.userRole)
+                {
+                    if (item.Checked)
+                    {
+                        <li>@item.Name</li>
+                    }
+                }
+            </ul>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STATUSNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUSNAME)
+        </dd>
+
+    </dl>
+</div>
